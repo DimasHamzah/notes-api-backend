@@ -41,7 +41,7 @@ const getAllNotesHandler = () => ({
   }
 });
 
-const updateNoteHandler = (request, h) => {
+const editNoteByIdHandler = (request, h) => {
   const { id } = request.params;
 
   const { title, tags, body } = request.payload;
@@ -55,8 +55,7 @@ const updateNoteHandler = (request, h) => {
       title,
       tags,
       body,
-      id,
-      updatedAt
+      updatedAt,
     };
 
     const response = h.response({
@@ -68,10 +67,10 @@ const updateNoteHandler = (request, h) => {
   }
 
   const response = h.response({
-    status: 'success',
-    message: 'Catatan berhasil diperbarui',
+    status: 'fail',
+    message: 'Gagal memperbarui catatan. Id tidak ditemukan',
   });
-  response.code(200);
+  response.code(404);
   return response;
 };
 
